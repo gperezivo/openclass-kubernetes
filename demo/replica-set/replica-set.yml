@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replica-set
+  namespace: openclass
+  labels:
+    name: replica-set
+    app: replica-set-api
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: demo-rs-pods
+  template:
+    metadata:
+      labels:
+        name: demo-rs-pods
+        app: replica-set-api
+    spec:
+      containers:
+      - name: replica-set-api
+        image: gperezivo/simple-api
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+          - containerPort: 80
+            name: http
+        env:
+          - name: MyVar
+            value: "MyReplicaSetValue"

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod-yaml
+  namespace: openclass
+  labels:
+    name: demo-pod-yaml
+    app: demo-pod
+spec:
+  containers:
+  - name: demo-pod-yaml
+    image: gperezivo/simple-api
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+    ports:
+      - containerPort: 80
+        name: http
+    env:
+      - name: MyVar
+        value: "MyPodValue"
